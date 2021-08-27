@@ -11,6 +11,8 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 import db
 import models
 
+sched = BlockingScheduler()
+
 
 def bitly(url: str) -> str:
     headers = {
@@ -69,5 +71,4 @@ def test():
 
 
 if __name__ == "__main__":
-    sched = BlockingScheduler()
     sched.start()
