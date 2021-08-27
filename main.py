@@ -45,7 +45,6 @@ def url_to_filename(url: str) -> str:
 
 def twi(item_url: str, item_disc: str, item_img_url: str):
     loguru.info(f'send: {item_url}, {item_disc}, {item_img_url}') 
-    key secret
     auth = tweepy.OAuthHandler(os.environ.get('consumer_key'), os.environ.get('consumer_secret'))
     auth.set_access_token(os.environ.get('twi_key'), os.environ.get('twi_secret'))
     api = tweepy.API(auth)
