@@ -54,11 +54,11 @@ def twi(item_url: str, item_disc: str, item_img_url: str):
     img_resp = requests.get(item_img_url)
     img_file = io.BytesIO(img_resp.content)
     media = api.media_upload(url_to_filename(item_img_url), file=img_file)
-    status = api.update_status('/n'.join([item_disc, bitly(item_url)]), media_ids=[media.media_id])
+    status = api.update_status(' '.join([item_disc, bitly(item_url)]), media_ids=[media.media_id])
     logger.info(status)
 
 @logger.catch
-@sched.scheduled_job('cron', hour=13, minute=33)
+@sched.scheduled_job('cron', hour=13)
 def run():
     plus_item = pop_plus_item()
     if not plus_item:
