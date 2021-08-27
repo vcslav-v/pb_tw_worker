@@ -3,7 +3,7 @@ import json
 import os
 from urllib.parse import urlparse
 
-import loguru
+from loguru import logger
 import requests
 import tweepy
 from apscheduler.schedulers.blocking import BlockingScheduler
@@ -44,7 +44,7 @@ def url_to_filename(url: str) -> str:
 
 
 def twi(item_url: str, item_disc: str, item_img_url: str):
-    loguru.info(f'send: {item_url}, {item_disc}, {item_img_url}') 
+    logger.info(f'send: {item_url}, {item_disc}, {item_img_url}') 
     auth = tweepy.OAuthHandler(os.environ.get('consumer_key'), os.environ.get('consumer_secret'))
     auth.set_access_token(os.environ.get('twi_key'), os.environ.get('twi_secret'))
     api = tweepy.API(auth)
@@ -53,9 +53,9 @@ def twi(item_url: str, item_disc: str, item_img_url: str):
     img_file = io.BytesIO(img_resp.content)
     media = api.media_upload(url_to_filename(url), file=img_file)
     status = api.update_status('/n'.join(item_disc, bitly(item_url)), media_ids=[media.media_id])
-    loguru.info(status)
+    logger.info(status)
 
-@loguru.catch
+@logger.catch
 def run():
     plus_item = pop_plus_item()
     if not plus_item:
@@ -65,7 +65,7 @@ def run():
 
 @sched.scheduled_job('interval', minutes=1)
 def test():
-    loguru.debug('minute')
+    logger.debug('minute')
 
 
 if __name__ == "__main__":
