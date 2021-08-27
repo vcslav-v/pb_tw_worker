@@ -54,7 +54,7 @@ def twi(item_url: str, item_disc: str, item_img_url: str):
     img_resp = requests.get(item_img_url)
     img_file = io.BytesIO(img_resp.content)
     media = api.media_upload(url_to_filename(url), file=img_file)
-    status = api.update_status('/n'.join(item_disc, bitly(item_url)), media_ids=[media.media_id])
+    status = api.update_status('/n'.join([item_disc, bitly(item_url)]), media_ids=[media.media_id])
     logger.info(status)
 
 @logger.catch
