@@ -58,16 +58,12 @@ def twi(item_url: str, item_disc: str, item_img_url: str):
     logger.info(status)
 
 @logger.catch
+@sched.scheduled_job('cron', hour=13, minute=30)
 def run():
     plus_item = pop_plus_item()
     if not plus_item:
         return
     twi(*plus_item)
-
-
-@sched.scheduled_job('interval', minutes=1)
-def test():
-    logger.debug('minute')
 
 
 if __name__ == "__main__":
