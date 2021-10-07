@@ -54,7 +54,8 @@ def twi(item_url: str, item_disc: str, item_img_url: str):
     img_resp = requests.get(item_img_url)
     img_file = io.BytesIO(img_resp.content)
     media = api.media_upload(url_to_filename(item_img_url), file=img_file)
-    status = api.update_status(' '.join([item_disc, bitly(item_url)]), media_ids=[media.media_id])
+    item_url_with_utm = item_url + '?utm_source=twitter&utm_medium=social&utm_campaign=twit_bot&utm_content=text&utm_term=premium-item'
+    status = api.update_status(' '.join([item_disc, bitly(item_url_with_utm)]), media_ids=[media.media_id])
     logger.info(status)
 
 @logger.catch
