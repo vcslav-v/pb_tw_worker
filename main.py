@@ -63,7 +63,7 @@ def twi(item_url: str, item_disc: str, item_img_url: str):
     img_resp = requests.get(item_img_url)
     img_file = io.BytesIO(img_resp.content)
     media = api.media_upload(url_to_filename(item_img_url), file=img_file)
-    item_url_with_utm = item_url + '?ref=Z6aVAno'
+    item_url_with_utm = item_url + os.environ.get('REF_POSTFIX')
     status = api.update_status(' '.join([item_disc, bitly(item_url_with_utm)]), media_ids=[media.media_id])
     logger.info(status)
 
