@@ -15,3 +15,15 @@ class PlusItem(Base):
     url = Column(Text)
     discription = Column(Text)
     image_url = Column(Text)
+
+
+class PremiumItem(Base):
+    """Items premium."""
+
+    __tablename__ = 'premium_items'
+
+    id = Column(Integer, primary_key=True)
+
+    url = Column(Text)
+    discription = Column(Text)
+    image_url = Column(Text)

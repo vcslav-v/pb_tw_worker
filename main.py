@@ -40,6 +40,15 @@ def pop_plus_item():
             return plus.url, plus.discription, plus.image_url
 
 
+def pop_premium_item():
+    with db.SessionLocal() as session:
+        premium = session.query(models.PremiumItem).first()
+        if premium:
+            session.delete(premium)
+            session.commit()
+            return premium.url, premium.discription, premium.image_url
+
+
 def url_to_filename(url: str) -> str:
     parsed_url = urlparse(url.rstrip('/'))
     return os.path.basename(parsed_url.path)
@@ -60,11 +69,20 @@ def twi(item_url: str, item_disc: str, item_img_url: str):
 
 @logger.catch
 @sched.scheduled_job('cron', hour=13)
-def run():
+def plus_task_run():
     plus_item = pop_plus_item()
     if not plus_item:
         return
     twi(*plus_item)
+
+
+@logger.catch
+@sched.scheduled_job('cron', hour=15)
+def premium_task_run():
+    premium_item = pop_premium_item()
+    if not premium_item:
+        return
+    twi(*premium_item)
 
 
 if __name__ == "__main__":
