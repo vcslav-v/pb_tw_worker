@@ -27,3 +27,14 @@ class PremiumItem(Base):
     url = Column(Text)
     discription = Column(Text)
     image_url = Column(Text)
+
+
+class Cookie(Base):
+    """Cookie."""
+
+    __tablename__ = 'cookies'
+
+    id = Column(Integer, primary_key=True)
+
+    domain = Column(Text)
+    data = Column(Text)
