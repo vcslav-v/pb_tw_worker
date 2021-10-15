@@ -14,10 +14,10 @@ COOKIES_FB_DOMAIN = '.facebook.com'
 
 def post(item_url: str, item_disc: str, *args):
     try:
-        access_token = get_access_token(SELENOID_URL)
+        access_token = get_access_token()
     except:
         delete_cookies()
-        access_token = get_access_token(SELENOID_URL)
+        access_token = get_access_token()
     cfg = {
         'page_id'      : FB_PAGE_ID,
         'access_token' : access_token,
