@@ -29,12 +29,12 @@ def pop_premium_item():
 
 
 @logger.catch
-@sched.scheduled_job('cron', hour=13, minute=3)
+@sched.scheduled_job('cron', hour=13)
 def plus_task_run():
     plus_item = pop_plus_item()
     if not plus_item:
         return
-    # twitter.twi(*plus_item)
+    twitter.twi(*plus_item)
     fb.post(*plus_item)
 
 
