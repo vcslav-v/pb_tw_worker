@@ -7,19 +7,18 @@ import models
 import json
 
 SELENOID_URL = os.environ.get('SELENOID_URL')
-FB_PAGE_ID = os.environ.get('FB_PAGE_ID')
 FB_NAME = os.environ.get('FB_NAME')
 FB_PASS = os.environ.get('FB_PASS')
 COOKIES_FB_DOMAIN = '.facebook.com'
 
-def post(item_url: str, item_disc: str, *args):
+def post(item_url: str, item_disc: str, *args, fb_page_id=''):
     try:
         access_token = get_access_token()
     except:
         delete_cookies()
         access_token = get_access_token()
     cfg = {
-        'page_id'      : FB_PAGE_ID,
+        'page_id'      : fb_page_id,
         'access_token' : access_token,
     }
 
@@ -35,8 +34,8 @@ def post(item_url: str, item_disc: str, *args):
     attachment={
         'link': item_url,
     },
-    profile_id=FB_PAGE_ID,
-)
+    profile_id=fb_page_id,
+    )
 
 
 def get_access_token() -> str:

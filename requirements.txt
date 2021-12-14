@@ -2,6 +2,8 @@ alembic==1.7.4; python_version >= "3.6"
 apscheduler==3.8.0; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.5.0" and python_version < "4")
 async-generator==1.10; python_version >= "3.7" and python_version < "4.0"
 attrs==21.2.0; python_version >= "3.7" and python_full_version < "3.0.0" and python_version < "4.0" or python_version >= "3.7" and python_version < "4.0" and python_full_version >= "3.5.0"
+beautifulsoup4==4.10.0; python_full_version > "3.0.0"
+bs4==0.0.1
 certifi==2021.5.30; python_version >= "3.7" and python_full_version < "3.0.0" and python_version < "4.0" or python_full_version >= "3.6.0" and python_version >= "3.7" and python_version < "4"
 cffi==1.15.0; os_name == "nt" and implementation_name != "pypy" and python_version >= "3.7" and python_version < "4.0" and (python_version >= "3.7" and python_full_version < "3.0.0" and python_version < "4.0" or python_full_version >= "3.5.0" and python_version < "4" and python_version >= "3.7")
 charset-normalizer==2.0.6; python_full_version >= "3.6.0" and python_version >= "3.6"
@@ -12,6 +14,7 @@ greenlet==1.1.2; python_version >= "3" and python_full_version < "3.0.0" and (pl
 h11==0.12.0; python_version >= "3.7" and python_version < "4.0" and python_full_version >= "3.6.1"
 idna==3.2; python_version >= "3.7" and python_full_version < "3.0.0" and python_version < "4.0" or python_full_version >= "3.6.0" and python_version >= "3.7" and python_version < "4.0"
 loguru==0.5.3; python_version >= "3.5"
+lxml==4.7.1; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.5.0")
 mako==1.1.5; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.4.0" and python_version >= "3.6"
 markupsafe==2.0.1; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.4.0" and python_version >= "3.6"
 oauthlib==3.1.1; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.4.0" and python_version >= "3.6"
@@ -26,6 +29,7 @@ selenium==4.0.0; python_version >= "3.7" and python_version < "4.0"
 six==1.16.0; python_version >= "3.7" and python_full_version < "3.0.0" and python_version < "4.0" or python_full_version >= "3.6.0" and python_version < "4" and python_version >= "3.7"
 sniffio==1.2.0; python_version >= "3.7" and python_version < "4.0"
 sortedcontainers==2.4.0; python_version >= "3.7" and python_version < "4.0"
+soupsieve==2.3.1; python_version >= "3.6" and python_full_version > "3.0.0"
 sqlalchemy==1.4.25; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.6.0")
 trio-websocket==0.9.2; python_version >= "3.7" and python_version < "4.0"
 trio==0.19.0; python_version >= "3.7" and python_version < "4.0"

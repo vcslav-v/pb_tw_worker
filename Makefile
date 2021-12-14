@@ -5,7 +5,7 @@ FILE_VSCODE_SETTINGS = .vscode/settings.json
 
 define VSCODE_SETTINGS
 echo "{" >> $(FILE_VSCODE_SETTINGS)
-echo "\"python.pythonPath\": \".venv/bin/python\"," >> $(FILE_VSCODE_SETTINGS)
+echo "\"python.pythonPath\": \"`poetry show -v 2 | grep virtualenv | cut -d ' ' -f 3 | xargs` \"," >> $(FILE_VSCODE_SETTINGS)
 echo "\"python.linting.pylintEnabled\": false," >> $(FILE_VSCODE_SETTINGS)
 echo "\"python.linting.flake8Enabled\": true," >> $(FILE_VSCODE_SETTINGS)
 echo "\"python.linting.mypyEnabled\": true," >> $(FILE_VSCODE_SETTINGS)

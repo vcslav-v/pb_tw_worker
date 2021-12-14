@@ -38,3 +38,13 @@ class Cookie(Base):
 
     domain = Column(Text)
     data = Column(Text)
+
+
+class PostedTDarticle(Base):
+    """Posted TD articles."""
+
+    __tablename__ = 'posted_td_articles'
+
+    id = Column(Integer, primary_key=True)
+
+    url = Column(Text, unique=True)

@@ -1,12 +1,17 @@
+import os
+
+import requests
 from apscheduler.schedulers.blocking import BlockingScheduler
 from loguru import logger
-import requests
 
 import db
-import models
-import twitter
 import fb
-import os
+import models
+import td
+import twitter
+
+PB_FB_PAGE_ID = os.environ.get('FB_PAGE_ID')
+TD_FB_PAGE_ID = os.environ.get('TD_FB_PAGE_ID')
 
 sched = BlockingScheduler()
 
@@ -44,7 +49,7 @@ def plus_task_run():
     if not plus_item:
         return
     twitter.twi(*plus_item)
-    fb.post(*plus_item)
+    fb.post(*plus_item, fb_page_id=PB_FB_PAGE_ID)
 
 
 @logger.catch
@@ -55,7 +60,19 @@ def premium_task_run():
     if not premium_item:
         return
     twitter.twi(*premium_item)
-    fb.post(*premium_item)
+    fb.post(*premium_item, fb_page_id=PB_FB_PAGE_ID)
+
+
+@logger.catch
+@sched.scheduled_job('cron', hour=18, minute=40)
+def td_task_run():
+    logger.info('TD items sending') 
+    td_item = td.get_new_article_post()
+    if not td_item:
+        return
+    fb.post(*td_item, fb_page_id=TD_FB_PAGE_ID)
+    td.add_posted_article(td_item[0])
+
 
 if __name__ == "__main__":
     logger.add(sink=send_tg_alarm)
