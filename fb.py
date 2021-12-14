@@ -79,7 +79,7 @@ def get_access_token() -> str:
     button.click()
 
     input_token = WebDriverWait(driver, timeout=20).until(
-        lambda l: l.find_element_by_xpath("//input[@placeholder='Маркер доступа']")
+        lambda l: l.find_element_by_xpath("//div[@class='paneContent']//input[@style]")
     )
     access_token = input_token.get_property('value')
     set_cookies(driver.get_cookies())
