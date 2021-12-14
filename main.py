@@ -64,7 +64,7 @@ def premium_task_run():
 
 
 @logger.catch
-@sched.scheduled_job('cron', hour=18, minute=57)
+@sched.scheduled_job('cron', hour=19, minute=4)
 def td_task_run():
     logger.info('TD items sending') 
     td_item = td.get_new_article_post()

@@ -1,10 +1,13 @@
+import json
+import os
+from time import sleep
+
 import facebook
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
-import os
+
 import db
 import models
-import json
 
 SELENOID_URL = os.environ.get('SELENOID_URL')
 FB_NAME = os.environ.get('FB_NAME')
@@ -59,7 +62,7 @@ def get_access_token() -> str:
         fb_login(driver)
 
     
-    current_window = driver.current_window_handle
+    start_window = driver.current_window_handle
     
     driver.get('https://developers.facebook.com/tools/explorer/')
     button = WebDriverWait(driver, timeout=20).until(
@@ -68,18 +71,19 @@ def get_access_token() -> str:
     button.click()
 
     for window_handle in driver.window_handles:
-        if window_handle != current_window:
+        if window_handle != start_window:
             driver.switch_to.window(window_handle)
-            current_window = driver.current_window_handle
             break
     
     button = WebDriverWait(driver, timeout=20).until(
         lambda l: l.find_element_by_xpath("//span[contains(.,'Продолжить как Вячеслав Васильев')]")
     )
     button.click()
-
+    sleep(3)
+    
+    driver.switch_to.window(start_window)
     input_token = WebDriverWait(driver, timeout=20).until(
-        lambda l: l.find_element_by_xpath("//div[@class='paneContent']//input[@style]")
+        lambda l: l.find_element_by_xpath("//input[@placeholder='Маркер доступа']")
     )
     access_token = input_token.get_property('value')
     set_cookies(driver.get_cookies())
