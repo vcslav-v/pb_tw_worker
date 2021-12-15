@@ -3,6 +3,7 @@ import requests
 import db
 import models
 import os
+import re
 
 TD_URL = os.environ.get('TD_URL')
 
@@ -31,8 +32,13 @@ def _get_discription(url: str) -> str:
     article_resp = requests.get(url)
     soup = BeautifulSoup(article_resp.content, 'lxml')
     title = soup.h1.text
-    sub_title = soup.h2.text
-    return f'{title}\n{sub_title}'
+    excerpt = re.search(r'(?<=\"excerpt\":\").+?(?=\")', soup.prettify())
+    excerpt = excerpt.group(0).strip('\\n')
+    if '\\u' in excerpt:
+        excerpt = re.sub(r'\\u(2019|2018)', '\u2019', excerpt)
+        excerpt = re.sub(r'\\u\w{4}', '', excerpt)
+    excerpt.strip()
+    return f'{title}\n{excerpt}'
 
 def get_new_article_post():
     posting_url = _get_new_articles()
