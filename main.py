@@ -49,7 +49,7 @@ def plus_task_run():
     if not plus_item:
         return
     twitter.twi(*plus_item)
-    fb.post(*plus_item, fb_page_id=PB_FB_PAGE_ID)
+    # fb.post(*plus_item, fb_page_id=PB_FB_PAGE_ID)
 
 
 @logger.catch
@@ -60,7 +60,7 @@ def premium_task_run():
     if not premium_item:
         return
     twitter.twi(*premium_item)
-    fb.post(*premium_item, fb_page_id=PB_FB_PAGE_ID)
+    # fb.post(*premium_item, fb_page_id=PB_FB_PAGE_ID)
 
 
 @logger.catch
@@ -70,7 +70,7 @@ def td_task_run():
     td_item = td.get_new_article_post()
     if not td_item:
         return
-    fb.post(*td_item, fb_page_id=TD_FB_PAGE_ID)
+    # fb.post(*td_item, fb_page_id=TD_FB_PAGE_ID)
     td.add_posted_article(td_item[0])
 
 
