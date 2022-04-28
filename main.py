@@ -31,7 +31,6 @@ def pop_plus_item():
             session.commit()
             return plus.url, plus.discription, plus.image_url
 
-
 def pop_premium_item():
     with db.SessionLocal() as session:
         premium = session.query(models.PremiumItem).first()
@@ -64,7 +63,6 @@ def premium_task_run():
 
 
 @logger.catch
-@sched.scheduled_job('cron', hour=15, minute=30)
 def td_task_run():
     logger.info('TD items sending') 
     td_item = td.get_new_article_post()
